@@ -21,7 +21,7 @@ public class E3 {
 		if (n < 3)
 			return n;
 		for (long i = n / 2; i > 1; i--) {
-			if (n % i == 0 && i % 2 != 0 && i % 3 != 0) {
+			if (n % i == 0) {
 				if (isPrime(i));
 					return i;
 			}
