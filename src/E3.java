@@ -22,7 +22,7 @@ public class E3 {
 			return n;
 		for (long i = n / 2; i > 1; i--) {
 			if (n % i == 0) {
-				if (isPrime(i));
+				if (isPrime(i))
 					return i;
 			}
 		}
