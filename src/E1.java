@@ -16,14 +16,31 @@ public class E1 {
 		Scanner sc = new Scanner(System.in);
 		E1 e1 = new E1();
 		int n = Integer.parseInt(sc.nextLine());
-		System.out.println(e1.solve(n));
+		System.out.println(e1.pattern(n));
+		System.out.println(e1.naive(n));
+	}
+
+	private int pattern(int n) {
+		int x = n / 15;
+		int sum = 0;
+		int j = 0;
+
+		for (j = 0; j < x; j++) {
+			sum += j * 15 * 7 + 45;
+		}
+		
+		for (int i = j * 15; i < n; i++) {
+			if (i % 3 == 0 || i % 5 == 0)
+				sum += i;
+		}
+		return sum;
 	}
 
 	/*
 	 * It avoids going through non multiples, however the overhead of the
 	 * conditionals makes it last longer.
 	 */
-	private int solve(int n) {
+	private int dynamic(int n) {
 		int n3 = 3;
 		int n5 = 5;
 		int sum = 0;
