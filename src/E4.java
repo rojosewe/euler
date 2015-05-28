@@ -2,7 +2,15 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
+/**
+ * A palindromic number reads the same both ways. The largest palindrome made
+ * from the product of two 2-digit numbers is 9009 = 91 × 99.
+ * 
+ * Find the largest palindrome made from the product of two 3-digit numbers.
+ * 
+ * @author Rodrigo Weffer
+ * 
+ */
 public class E4 {
 	public static void main(String... args) {
 		Scanner sc = new Scanner(System.in);
@@ -16,66 +24,68 @@ public class E4 {
 	 */
 	private int solve(int n) {
 		int largest = -1;
-		for(int i = 999; i > 500; i--){
-			for(int j = 999; j > 500; j--){
-				Integer res = i*j;
-				if(res < largest)
+		for (int i = 999; i > 500; i--) {
+			for (int j = 999; j > 500; j--) {
+				Integer res = i * j;
+				if (res < largest)
 					break;
-				if(isPalindrome(res)){
+				if (isPalindrome(res)) {
 					largest = Math.max(res, largest);
 				}
 			}
 		}
 		return largest;
 	}
-	
-	class Result implements Comparable<Result>{
+
+	class Result implements Comparable<Result> {
 		Integer i;
 		Integer j;
 		Integer prod;
+
 		public Result(int i, int j, int prod) {
 			super();
 			this.i = i;
 			this.j = j;
 			this.prod = prod;
 		}
+
 		@Override
 		public int compareTo(Result o) {
 			return o.prod.compareTo(this.prod);
 		}
-		
-		public String toString(){
+
+		public String toString() {
 			return prod + " = " + i + " * " + j;
 		}
 	}
-	
+
 	private int explorePatterns(int n) {
 		LinkedList<Result> chain = new LinkedList<Result>();
-		for(int i = 999; i > 500; i--){
-			for(int j = 999; j > 500; j--){
-				Integer res = i*j;
-				if(isPalindrome(res)){
+		for (int i = 999; i > 500; i--) {
+			for (int j = 999; j > 500; j--) {
+				Integer res = i * j;
+				if (isPalindrome(res)) {
 					Result result = new Result(i, j, res);
 					chain.add(result);
 				}
 			}
 		}
-		
+
 		Collections.sort(chain);
 		System.out.println(chain);
 		return 0;
 	}
 
-	private boolean isPalindrome(Integer res){
-		if(res < 0)
+	private boolean isPalindrome(Integer res) {
+		if (res < 0)
 			return false;
 		boolean pal = true;
 		int base = (int) Math.pow(10, Math.ceil(Math.log10(res)) - 1);
-		while(res > 9){
-			int last = res % ((res /10)*10);
-			int first = res / base ;
+		while (res > 9) {
+			int last = res % ((res / 10) * 10);
+			int first = res / base;
 			pal &= last == first;
-			if(!pal)
+			if (!pal)
 				return false;
 			res -= first * base;
 			res /= 10;
