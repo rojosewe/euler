@@ -38,7 +38,8 @@ import java.util.Scanner;
  */
 public class E11 {
 	
-	static String sblock = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 " +
+	static String sblock = 
+	 "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 " +
 	 "49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00 " +
 	 "81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65 " +
 	 "52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91 " +
@@ -57,17 +58,19 @@ public class E11 {
 	 "04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36 " +
 	 "20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16 " +
 	 "20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54 " +
-	 "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 ";	
-	static Integer[][] block = new Integer[20][20];
+	 "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 ";
 	
-	long v = 1;
-	long h = 1;
-	long d = 1;
 	
 	public static void main(String... args) {
 		Scanner sc = new Scanner(System.in);
 		E11 e = new E11();
 		int n = Integer.parseInt(sc.nextLine());
+		Integer[][] block = buildArray();
+		System.out.println(e.solve(block, n));
+	}
+
+	private static Integer[][] buildArray() {
+		Integer[][] block = new Integer[20][20];
 		int x = 0;
 		int y = 0;
 		for(String s : sblock.split(" ")){
@@ -79,21 +82,58 @@ public class E11 {
 				x++;
 			}
 		}
-		System.out.println(e.solve(n));
+		return block;
 	}
 
-	private long solve(int n) {
+	private long solve(Integer[][] block, int n) {
+		long prod = 1;
 		long max = 0;
 		for (int i = 0; i < block.length; i++) {
-			for (int j = 0; j < block[i].length; j++) {
-				h *= block[i][j];
-				v *= block[i][j];
-				d *= block[i][j];
-				if(i >= n){
-					
+			for (int j = 0; j < block.length; j++) {
+				System.out.println(i + ", " + j);
+				
+				for (int k = 0; k < n && j + n <= block.length; k++) {
+					int val = block[i][j + k];
+					System.out.print( "* " + val);
+					prod *= val; 
 				}
+				System.out.print(" = " + prod);
+				max = Math.max(max, prod);
+				prod = 1;
+				System.out.println("\n-------------------------");
+				
+				for (int k = 0; k < n && i + n <= block.length; k++) {
+					int val = block[i + k][j];
+					System.out.print( "* " + val);
+					prod *= val; 
+				}
+				System.out.print(" = " + prod);
+				max = Math.max(max, prod);
+				prod = 1;
+				System.out.println("\n-------------------------");
+				
+				for (int k = 0; k < n && i + n <= block.length && j + n <= block.length; k++) {
+					int val = block[i + k][j + k];
+					System.out.print( "* " + val);
+					prod *= val; 
+				}
+				System.out.print(" = " + prod);
+				max = Math.max(max, prod);
+				prod = 1;
+				System.out.println("\n-------------------------");
+				
+				for (int k = 0; k < n && i + n <= block.length && j - n > 0; k++) {
+					int val = block[i + k][j - k];
+					System.out.print( "* " + val);
+					prod *= val; 
+				}
+				System.out.print(" = " + prod);
+				max = Math.max(max, prod);
+				prod = 1;
+				System.out.println("\n-------------------------");
 			}
 		}
+		
 		return max;
 	}
 }
