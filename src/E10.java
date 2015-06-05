@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see
- * that the 6th prime is 13. What is the 10 001st prime number?
+ * The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+ * 
+ * Find the sum of all the primes below two million.
  * 
  * @author Rodrigo Weffer
  * 
@@ -23,7 +24,7 @@ public class E10 {
 		int i = 5;
 		long sum = 0;
 		while (i < n) {
-			if (isPrime(primes, i)){
+			if (isPrime(primes, i)) {
 				primes.add(i);
 				sum += i;
 			}

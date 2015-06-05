@@ -62,7 +62,7 @@ public class E8 {
 		for (int i = 0; i < block.length; i++) {
 			block[i] = Character.getNumericValue(charArray[i]);
 		}
-		System.out.println(e.naive(n, block));
+		System.out.println(e.solve(n, block));
 	}
 	
 	private long naive(int n, Integer[] block) {
@@ -81,21 +81,19 @@ public class E8 {
 	private long solve(int n, Integer[] block) {
 		long prod = 1;
 		long max = 0;
-		int lastZero = n+1;
+		int lastZero = 0;
 		for (int i = 0; i < block.length; i++) {
 			if(block[i] == 0){
 				lastZero = 0;
-				prod = 0;
+				prod = 1;
+			}else{
+				prod *= block[i];
+				if(lastZero >= n && block[i - n] != 0)
+					prod /= block[i-n];
 			}
-			if(lastZero == n)
-				prod = 1 * block[i];
-			else{
-				prod *= block[i]; 
-			}
-			if(i >= n && block[i - n] != 0)
-				prod /= block[i-n];
 			max = Math.max(max, prod);
 			lastZero++;
+			System.out.println("--------------------------");
 		}
 		
 		return max;
