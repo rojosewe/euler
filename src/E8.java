@@ -93,9 +93,7 @@ public class E8 {
 			}
 			max = Math.max(max, prod);
 			lastZero++;
-			System.out.println("--------------------------");
 		}
-		
 		return max;
 	}
 
