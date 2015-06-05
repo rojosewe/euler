@@ -17,7 +17,6 @@ public class E1 {
 		E1 e1 = new E1();
 		int n = Integer.parseInt(sc.nextLine());
 		System.out.println(e1.pattern(n));
-		System.out.println(e1.naive(n));
 	}
 
 	private int pattern(int n) {

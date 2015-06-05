@@ -20,7 +20,7 @@ public class E3 {
 	private long solve(long n) {
 		if (n < 3)
 			return n;
-		for (long i = n / 2; i > 1; i--) {
+		for (long i = (long) Math.sqrt(n); i > 1; i--) {
 			if (n % i == 0) {
 				if (isPrime(i))
 					return i;
