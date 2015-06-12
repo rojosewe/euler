@@ -1,10 +1,4 @@
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * The following iterative sequence is defined for the set of positive integers:
