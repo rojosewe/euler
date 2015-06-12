@@ -85,52 +85,42 @@ public class E11 {
 		return block;
 	}
 
+	/*
+	 * Soul crushing, but (DP value) * new / old would be a better solution...
+	 */
 	private long solve(Integer[][] block, int n) {
 		long prod = 1;
 		long max = 0;
 		for (int i = 0; i < block.length; i++) {
 			for (int j = 0; j < block.length; j++) {
-				System.out.println(i + ", " + j);
 				
 				for (int k = 0; k < n && j + n <= block.length; k++) {
 					int val = block[i][j + k];
-					System.out.print( "* " + val);
 					prod *= val; 
 				}
-				System.out.print(" = " + prod);
 				max = Math.max(max, prod);
 				prod = 1;
-				System.out.println("\n-------------------------");
 				
 				for (int k = 0; k < n && i + n <= block.length; k++) {
 					int val = block[i + k][j];
-					System.out.print( "* " + val);
 					prod *= val; 
 				}
-				System.out.print(" = " + prod);
 				max = Math.max(max, prod);
 				prod = 1;
-				System.out.println("\n-------------------------");
 				
 				for (int k = 0; k < n && i + n <= block.length && j + n <= block.length; k++) {
 					int val = block[i + k][j + k];
-					System.out.print( "* " + val);
 					prod *= val; 
 				}
-				System.out.print(" = " + prod);
 				max = Math.max(max, prod);
 				prod = 1;
-				System.out.println("\n-------------------------");
 				
 				for (int k = 0; k < n && i + n <= block.length && j - n > 0; k++) {
 					int val = block[i + k][j - k];
-					System.out.print( "* " + val);
 					prod *= val; 
 				}
-				System.out.print(" = " + prod);
 				max = Math.max(max, prod);
 				prod = 1;
-				System.out.println("\n-------------------------");
 			}
 		}
 		
